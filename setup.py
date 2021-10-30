@@ -4,12 +4,12 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="gnptemplateproject",
+    name="tool_zap",
     version="0.0.1",
-    description="A template for new Python projects",
+    description="Collection of command line string processing tools that can be used locally or remotely",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/SirGnip/python_template",
+    url="https://github.com/SirGnip/tool_zap",
 
     # Code is in "src/", an un-importable directory (at least not easily or accidentally)
     # Helps reduce confusion around whether code from repo or site-packages is being used.
@@ -29,8 +29,5 @@ setuptools.setup(
         "pytest==5.3.1",
         "pytest-cov==2.8.1",
         "pylint==2.4.4",
-        "mypy==0.750",
-        # personal dependencies
-        #"mylib @ http://github.com/SirGnip/mylib/tarball/0.0.1#egg=package-1.0",
     ],
 )

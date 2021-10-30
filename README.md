@@ -1,5 +1,5 @@
-# python_template Repo
-A template for new Python projects
+# tool_zap
+Collection of command line string processing tools that can be used locally or remotely
 
 # How to run tools against the code
 
@@ -34,10 +34,6 @@ A template for new Python projects
     pylint src/  # recurses into directory
     pylint src/ tests/
     pylint gnp.common  # can use package names to lint what is installed
-    
-    # run mypy
-    mypy src/  # recurses into directory tree
-    mypy src/gnp/common/util.py
 
     cd src
     mypy -p gnp
