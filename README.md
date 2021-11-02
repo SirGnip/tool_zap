@@ -1,6 +1,16 @@
 # tool_zap
 Collection of command line string processing tools that can be used locally or remotely
 
+
+# Components
+
+- Command line tools that do string processing on stdin. Useful as part of unix-style command line pipelines.
+- Webserver and bootstrap commands that allow one-file command line tools to be used on remote computers via `curl`. 
+- RPC server to support command line tools
+
+These components could potentially be split out into independent projects at a later time.
+
+  
 # How to run tools against the code
 
     # create and activate virtual environment
