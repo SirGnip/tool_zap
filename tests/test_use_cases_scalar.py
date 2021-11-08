@@ -39,16 +39,16 @@ def do(input_text, cmd):
 
 
 def test_initial():
-    t = do(d1, 'pylines.py "text[1]"')
+    t = do(d1, 'block_exp.py "text[1]"')
     assert t == 'b'
 
 ########## Operations on scalar (text block treated as one string, operations done on whole block)
 # Index operations refer to character in text block
 def test_slice():
-    t = do(d1, 'block_slice.py -3')
+    t = do(d1, 'block_exp.py "text[-3]"')
     assert t == 'd'
 
-    t = do(d1, 'block_slice.py 1:3')
+    t = do(d1, 'block_exp.py "text[1:3]"')
     assert t == 'bc'
 
 def test_stats():

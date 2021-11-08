@@ -13,6 +13,21 @@ strip r/l/both
 del #/#:#  # delete lines
 replace #/#:# <str>  # <str> can be a string with embedded newlines
 
+
+abc
+def
+ghi
+
+slice 2
+line: def
+chars: b e g
+
+call once:
+- block
+- lines
+call once per line
+- per line
+
 """
 import subprocess
 
@@ -34,19 +49,27 @@ def do(input_text, cmd):
 
 
 def test_initial():
-    t = do(d1, 'pyline.py "t[1]"')
+    t = do(d1, 'line_exp.py "t[1]"')
     assert t == 'b\nh\nn\nr\n'  # TODO: get rid of trailing newline?
 
 ########## Operations on vector (text block treated as a vector  of items, where each line is an item in the vector)
 # Index operations refer to lines in the text block
-def test_slice():
-    t = do(d1, 'slice.py -2')
-    assert t == 'mnop'
+def test_slice_lines_in_text():
+    t = do(d1, 'lines_exp.py "[lines[-2]]')
+    assert t == 'mnop\n'
 
-    t = do(d1, 'slice.py 1:3')
+    t = do(d1, 'lines_exp.py "lines[1:3]')
     assert t == '''
 ghijkl
-mnop'''.rstrip('\n')
+mnop
+'''.lstrip('\n')
+
+def test_slice_chars_in_each_line():
+    t = do(short, 'line_exp.py "t[2]"')
+    assert t == 'c\ni\n'
+
+    t = do(short, 'line_exp.py "t[0] + \'_\' + t[-2:]"')
+    assert t == 'a_ef\ng_kl\n'
 
 def test_stats():
     t = do(d1, 'stats.py')
