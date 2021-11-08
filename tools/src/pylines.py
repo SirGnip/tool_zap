@@ -1,11 +1,11 @@
 import argparse
 import sys
-DESC = 'Process all lines from stdin with expression.'
-EPILOG = 'Example: pylines.py "lines[1:3] + lines[-1:]'
+DESC = 'Process entire block of text from stdin with expression.'
+EPILOG = 'Example: pylines.py "text[1:3] + text[-1:]'
 parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
-parser.add_argument('exp', help='Python expression with lines in list "lines"')
+parser.add_argument('exp', help='Python expression that operates on variable "text"')
 args = parser.parse_args()
-lines = sys.stdin.readlines()
-result = eval(args.exp, {}, {'lines': lines})
-print(''.join(result), end='')
+all_text = sys.stdin.read()
+result = eval(args.exp, {}, {'text': all_text})
+print(result, end='')
 

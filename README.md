@@ -6,11 +6,14 @@ Collection of command line string processing tools that can be used locally or r
 
 - Command line tools that do string processing on stdin. Useful as part of unix-style command line pipelines.
 - Webserver and bootstrap commands that allow one-file command line tools to be used on remote computers via `curl`. 
-- RPC server to support command line tools
+- RPC server to support command line tools that need to communicate back to host box (use tools only available on host, show GUI's on desktop, etc.)
 
 These components could potentially be split out into independent projects at a later time.
 
-  
+
+# Features
+
+
 # How to run tools against the code
 
     # create and activate virtual environment
