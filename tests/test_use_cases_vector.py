@@ -68,7 +68,7 @@ def test_slice_chars_in_each_line():
     t = do(short, 'line_exp.py "t[2]"')
     assert t == 'c\ni\n'
 
-    t = do(short, 'line_exp.py "t[0] + \'_\' + t[-2:]"')
+    t = do(short, '''line_exp.py "t[0] + '_' + t[-2:]"''')
     assert t == 'a_ef\ng_kl\n'
 
 def test_counts():
@@ -77,7 +77,7 @@ def test_counts():
 
 def test_prepend():
     # prepend X-
-    t = do(short, 'line_exp.py "\'x_\' + t')
+    t = do(short, '''line_exp.py "'x_' + t''')
     assert t == '''
 x_abcdef
 x_ghijkl
@@ -85,7 +85,7 @@ x_ghijkl
 
 def test_append():
     # append _x
-    t = do(short, 'line_exp.py "t + \'_x\'"')
+    t = do(short, '''line_exp.py "t + '_x'"''')
     assert t == '''
 abcdef_x
 ghijkl_x
@@ -138,7 +138,7 @@ def test_replace():
     # replace indexed/sliced line(s) with given line)
     # could be accomplished by composing a delete then an insert
     # replace 2 NEW
-    t = do(d1, 'lines_exp.py "lines[:2] + [\'NEW\',] + lines[3:]"')
+    t = do(d1, '''lines_exp.py "lines[:2] + ['NEW',] + lines[3:]"''')
     assert t == '''
 abcdef
 ghijkl
@@ -148,7 +148,7 @@ qrst
 
     # may be redundant with "delete & insert"
     # replace 1:3 "NEW LINE"
-    t = do(d1, 'lines_exp.py "lines[:1] + [\'NEW LINE\',] + lines[3:]"')
+    t = do(d1, '''lines_exp.py "lines[:1] + ['NEW LINE',] + lines[3:]"''')
     assert t == '''
 abcdef
 NEW LINE
@@ -157,7 +157,7 @@ qrst
 
 def test_insert():
     # insert 1 NEW
-    t = do(short, 'lines_exp.py "lines[:1] + [\'NEW\',] + lines[1:]"')
+    t = do(short, '''lines_exp.py "lines[:1] + ['NEW',] + lines[1:]"''')
     assert t == '''
 abcdef
 NEW
