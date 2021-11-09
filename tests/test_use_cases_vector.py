@@ -31,8 +31,6 @@ call once per line
 """
 import subprocess
 
-# Remove redundant command and have them only be in the vector side. Only use the scalar/block naming if it absolutely has to be differentiated.
-
 
 short = '''
 abcdef
@@ -50,7 +48,7 @@ def do(input_text, cmd):
 
 def test_initial():
     t = do(d1, 'line_exp.py "t[1]"')
-    assert t == 'b\nh\nn\nr\n'  # TODO: get rid of trailing newline?
+    assert t == 'b\nh\nn\nr\n'
 
 ########## Operations on vector (text block treated as a vector  of items, where each line is an item in the vector)
 # Index operations refer to lines in the text block
@@ -70,10 +68,6 @@ def test_slice_chars_in_each_line():
 
     t = do(short, '''line_exp.py "t[0] + '_' + t[-2:]"''')
     assert t == 'a_ef\ng_kl\n'
-
-def test_counts():
-    t = do(short, 'counts.py')
-    assert t == '13 characters\n2 words\n2 lines\n'
 
 def test_prepend():
     # prepend X-
@@ -170,9 +164,3 @@ def test_join():
 
     t = do(d1 + '\n', 'join.py ,')
     assert t == 'abcdef,ghijkl,mnop,qrst\n'
-
-
-# Implemented in scalar, but don't make sense to have scalar and vector.
-# Could just name with "plain" name and not use the scalar name:
-# commands: sub, case
-

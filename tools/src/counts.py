@@ -5,6 +5,8 @@ EPILOG = 'Example: counts.py'
 parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
 args = parser.parse_args()
 text = sys.stdin.read()
+if text.endswith('\n'):  # remove final line that is added to output
+    text = text[:-1]
 char_count = len(text)
 word_count = len(text.split())
 line_count = len(text.split('\n'))

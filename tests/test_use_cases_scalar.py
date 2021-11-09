@@ -51,6 +51,13 @@ def test_slice():
     t = do(d1, 'block_exp.py "text[1:3]"')
     assert t == 'bc'
 
+def test_counts():
+    t = do('abc\ndef ghi\njklm\n', 'counts.py')
+    assert t == '16 characters\n4 words\n3 lines\n'
+
+    t = do('\n\n\n', 'counts.py')
+    assert t == '2 characters\n0 words\n3 lines\n'
+
 def test_prepend():
     # block_prepend xyz
     t = do(d1, '''block_exp.py "'xyz' + text"''')
