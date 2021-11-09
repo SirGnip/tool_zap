@@ -52,62 +52,78 @@ def test_slice():
     assert t == 'bc'
 
 def test_prepend():
-    t = do(d1, 'block_prepend.py xyz')
+    # block_prepend xyz
+    t = do(d1, '''block_exp.py "'xyz' + text"''')
     assert t == 'xyzabcdef'
 
 def test_append():
-    t = do(d1, 'block_append.py xyz')
+    # block_append xyz
+    t = do(d1, '''block_exp.py "text + 'xyz'"''')
     assert t == 'abcdefxyz'
 
 def test_strip():
-    t = do('  abc  ', 'block_strip.py')
+    # block_strip
+    t = do('  abc  ', 'block_exp.py "text.strip()"')
     assert t == 'abc'
 
-    t = do('  abc  ', 'block_lstrip.py')
+    # block_lstrip
+    t = do('  abc  ', 'block_exp.py "text.lstrip()"')
     assert t == 'abc  '
 
-    t = do('  abc  ', 'block_rstrip.py')
+    # block_rstrip
+    t = do('  abc  ', 'block_exp.py "text.rstrip()"')
     assert t == '  abc'
 
 def test_del():
-    t = do(d1, 'block_del 2')
+    # block_del 2
+    t = do(d1, 'block_exp.py "text[:2] + text[3:]"')
     assert t == 'abdef'
 
-    t = do(d1, 'block_del 1:3')
+    # block_del 1:3
+    t = do(d1, 'block_exp.py "text[:1] + text[3:]"')
     assert t == 'adef'
 
 def test_replace():
-    t = do(d1, 'block_replace 2 ZZZ')
+    # block_replace 2 ZZZ
+    # could be accomplished by composing a delete than an insert
+    t = do(d1, '''block_exp.py "text[:2] + 'ZZZ' + text[3:]"''')
     assert t == 'abZZZdef'
 
-    t = do(d1, 'block_replace 1:3 ZZZ')
+    # block_replace 1:3 ZZZ
+    t = do(d1, '''block_exp.py "text[:1] + 'ZZZ' + text[3:]"''')
     assert t == 'aZZZdef'
 
 def test_insert():
-    t = do(d1, 'block_insert 2 ZZZ')
+    # block_insert 2 ZZZ
+    t = do(d1, '''block_exp.py "text[:2] + 'ZZZ' + text[2:]"''')
     assert t == 'abZZZcdef'
 
 def test_sub():
-    t = do('abcdefabcdef', 'block_sub bc ZZZ')
+    # block_sub bc ZZZ
+    t = do('abcdefabcdef', '''block_exp.py "text.replace('bc', 'ZZZ')"''')
     assert t == 'aZZZdefaZZZdef'
     # Q: Support regex?
 
 # NOTE: delete, replace, insert, and sub are very similar
 
 def test_case():
-    t = do(d1, 'block_upper')
+    # block_upper
+    t = do(d1, 'block_exp.py "text.upper()"')
     assert t == 'ABCDEF'
 
-    t = do('ABCDEF', 'block_lower')
+    # block_lower
+    t = do('ABCDEF', 'block_exp.py "text.lower()"')
     assert t == 'abcdef'
 
-    t = do('abc def', 'block_title')
+    # block_title
+    t = do('abc def', 'block_exp.py "text.title()"')
     assert t == 'Abc Def'
 
 # Center doesn't make much sense with scalar
 
 def test_split():
-    t = do('abc,def,ghi', 'split ,')
+    # split ,
+    t = do('abc,def,ghi', r'''block_exp.py "text.replace(',', '\n')"''')
     assert t == 'abc\ndef\nghi'
     # IDEA: does split have a default delimiter? arbitrary whitespace (awk style). Use regex?
 
