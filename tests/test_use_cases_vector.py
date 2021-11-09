@@ -71,76 +71,105 @@ def test_slice_chars_in_each_line():
     t = do(short, 'line_exp.py "t[0] + \'_\' + t[-2:]"')
     assert t == 'a_ef\ng_kl\n'
 
-def test_stats():
-    t = do(d1, 'stats.py')
-    assert t == '13 characters, 2 words, 2 lines'
+def test_counts():
+    t = do(short, 'counts.py')
+    assert t == '13 characters\n2 words\n2 lines\n'
 
 def test_prepend():
-    t = do(short, 'prepend.py x_')
+    # prepend X-
+    t = do(short, 'line_exp.py "\'x_\' + t')
     assert t == '''
 x_abcdef
-x_ghijkl'''.rstrip('\n')
+x_ghijkl
+'''.lstrip('\n')
 
 def test_append():
-    t = do(short, 'append.py _x')
+    # append _x
+    t = do(short, 'line_exp.py "t + \'_x\'"')
     assert t == '''
 abcdef_x
-ghijkl_x'''.rstrip('\n')
+ghijkl_x
+'''.lstrip('\n')
 
 def test_strip():
     orig = '''
   abc  def  
-  ghi  jkl  '''.rstrip('\n')
+  ghi  jkl  '''.lstrip('\n')
 
-    t = do(orig, 'strip.py')
-    assert t == 'abc  def\nghi  jkl'
+    # strip
+    t = do(orig, 'line_exp.py "t.strip()')
+    assert t == 'abc  def\nghi  jkl\n'
 
-    t = do(orig, 'lstrip.py')
-    assert t == 'abc  def  \nghi  jkl  '
+    # lstrip
+    t = do(orig, 'line_exp.py "t.lstrip()"')
+    assert t == 'abc  def  \nghi  jkl  \n'
 
-    t = do(orig, 'rstrip.py')
-    assert t == '  abc  def\n  ghi  jkl'
+    # rstrip
+    t = do(orig, 'line_exp.py "t.rstrip()"')
+    assert t == '  abc  def\n  ghi  jkl\n'
 
-def test_del():
-    t = do(d1, 'del 1')
+def test_del_line():
+    # del 1
+    t = do(d1, 'lines_exp.py "lines[:1] + lines[2:]')
     assert t == '''
 abcdef
 mnop
-qrst'''.lstrip('\n')
+qrst
+'''.lstrip('\n')
 
-    t = do(d1, 'del 1:3')
+    # del 1:3
+    t = do(d1, 'lines_exp.py "[lines[0],] + lines[3:]')
     assert t == '''
 abcdef
-qrst'''.lstrip('\n')
+qrst
+'''.lstrip('\n')
+
+def test_del_char_per_line():
+    # del 1
+    t = do(d1, 'line_exp.py "t[:1] + t[2:]')
+    assert t == '''
+acdef
+gijkl
+mop
+qst
+'''.lstrip('\n')
 
 def test_replace():
-    t = do(d1, 'replace 2 NEW')
+    # replace indexed/sliced line(s) with given line)
+    # could be accomplished by composing a delete then an insert
+    # replace 2 NEW
+    t = do(d1, 'lines_exp.py "lines[:2] + [\'NEW\',] + lines[3:]"')
     assert t == '''
 abcdef
 ghijkl
 NEW
-qrst'''.lstrip('\n')
+qrst
+'''.lstrip('\n')
 
     # may be redundant with "delete & insert"
-    t = do(d1, 'replace 1:3 "NEW LINE"')
+    # replace 1:3 "NEW LINE"
+    t = do(d1, 'lines_exp.py "lines[:1] + [\'NEW LINE\',] + lines[3:]"')
     assert t == '''
 abcdef
 NEW LINE
-qrst'''.lstrip('\n')
+qrst
+'''.lstrip('\n')
 
 def test_insert():
-    t = do(short, 'insert 1 NEW')
+    # insert 1 NEW
+    t = do(short, 'lines_exp.py "lines[:1] + [\'NEW\',] + lines[1:]"')
     assert t == '''
 abcdef
 NEW
-ghijkl'''.lstrip('\n')
+ghijkl
+'''.lstrip('\n')
 
 def test_join():
-    t = do(d1, 'join ,')
-    assert t == 'abcdef,ghijkl,mnop,qrst'
+    t = do(d1, 'join.py ,')
+    assert t == 'abcdef,ghijkl,mnop,qrst\n'
 
-    t = do(d1 + '\n', 'join ,')
-    assert t == 'abcdef,ghijkl,mnop,qrst,'
+    t = do(d1 + '\n', 'join.py ,')
+    assert t == 'abcdef,ghijkl,mnop,qrst\n'
 
 
 # Implemented in scalar, but don't make sense to have scalar and vector.

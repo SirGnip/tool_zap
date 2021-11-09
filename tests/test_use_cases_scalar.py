@@ -51,10 +51,6 @@ def test_slice():
     t = do(d1, 'block_exp.py "text[1:3]"')
     assert t == 'bc'
 
-def test_stats():
-    t = do(d1, 'block_stats.py')
-    assert t == '13 characters, 2 words, 2 lines'
-
 def test_prepend():
     t = do(d1, 'block_prepend.py xyz')
     assert t == 'xyzabcdef'
