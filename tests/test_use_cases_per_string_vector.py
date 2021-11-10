@@ -3,35 +3,7 @@
 The vector of lines is mutated at the individual string level (changing the contents of a line)
 as opposed to the line level (adding or removing lines)
 
-
-# some kind of template formatting where lines get read, parsed into pieces and fed into a template? fstring? variable expansion? regex transform?
-
-# read
-index/slice #/#:#  # return only lines that match
-stats (char, word, line count)
-
-# mutate
-prepend <line>
-append <line>
-strip r/l/both
-del #/#:#  # delete lines
-replace #/#:# <str>  # <str> can be a string with embedded newlines
-
-
-abc
-def
-ghi
-
-slice 2
-line: def
-chars: b e g
-
-call once:
-- block
-- lines
-call once per line
-- per line
-
+Index operations refer to characters in each line
 """
 import subprocess
 
@@ -46,11 +18,11 @@ ghijkl
 mnop
 qrst'''.lstrip('\n')
 
+
 def do(input_text, cmd):
     return subprocess.run(r'..\tools\src\\' + cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, input=input_text, check=False, text=True).stdout
 
 
-########## Operations on vector (text block treated as a vector  of items, where each line is an item in the vector)
 def test_slice_chars_in_each_line():
     t = do(short, 'line_exp.py "t[2]"')
     assert t == 'c\ni\n'

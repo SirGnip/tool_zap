@@ -1,32 +1,8 @@
 """
-Enumerate all use cases and see how the current implementation handles them
+"Scalar" commands
+The block of text is treated as one long string
 
-- let out before/after in most consise way possible for documentation. Then see if you can code it in a similar way.
-- list out use cases, then match with commands of how to do it. Then decide if the commands are too opaque.
-- TDD
-- create testing and then see if my simple commands can satisfy all the tests
-- create only the commands I need first? try using the basics/flexible commands and then expand?
-
-slice syntax: # or #:# or :# or #:
-
-### scalar
-# read
-index/slice # or #:#
-stats (char, word, line count)
-
-# mutate
-prepend <str>
-append <str>
-strip r/l/both
-del #/#:#
-replace #/#:# <str>  # can also handle setting of one char
-insert # <str>  # simplification of replace?
-sub <match> <target>  # regex?
-capital upper/lower/title
-center <width>
-
-# type conversion
-split <char>
+Index operations refer to character in text block
 """
 import subprocess
 
@@ -42,8 +18,6 @@ def test_initial():
     t = do(d1, 'block_exp.py "text[1]"')
     assert t == 'b'
 
-########## Operations on scalar (text block treated as one string, operations done on whole block)
-# Index operations refer to character in text block
 def test_slice():
     t = do(d1, 'block_exp.py "text[-3]"')
     assert t == 'd'
