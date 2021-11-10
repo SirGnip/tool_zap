@@ -103,10 +103,12 @@ def test_case():
 # Center doesn't make much sense with scalar
 
 def test_split():
-    # split ,
-    t = do('abc,def,ghi', r'''block_exp.py "text.replace(',', '\n')"''')
-    assert t == 'abc\ndef\nghi'
-    # IDEA: does split have a default delimiter? arbitrary whitespace (awk style). Use regex?
+    # IDEA: does split have a default delimiter? default to arbitrary-length whitespace (awk style)? Support regex?
 
+    t = do('abc,def,ghi', 'split.py ,')
+    assert t == 'abc\ndef\nghi\n'
+
+    t = do('abc,def,ghi\n123,xyz', 'split.py ,')
+    assert t == 'abc\ndef\nghi\n123\nxyz\n'
 
 
