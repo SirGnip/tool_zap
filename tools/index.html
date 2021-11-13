@@ -1,4 +1,0 @@
-<pre>
-zap() { tool=$1; shift; python <(curl --silent http://localhost:5555/src/$tool.py) "$@"; }
-zaps() { tool=$1; shift; source <(curl --silent http://localhost:5555/src/$tool.sh) "$@"; }
-</pre>

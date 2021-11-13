@@ -20,7 +20,7 @@ qrst'''.lstrip('\n')
 
 
 def do(input_text, cmd):
-    return subprocess.run(r'..\tools\src\\' + cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, input=input_text, check=False, text=True).stdout
+    return subprocess.run(r'..\src\tool_zap\tools\cli\\' + cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, input=input_text, check=False, text=True).stdout
 
 
 
