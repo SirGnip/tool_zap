@@ -25,10 +25,10 @@ def do(input_text, cmd):
 
 
 def test_slice_lines_in_text():
-    t = do(d1, 'lines_exp.py "[lines[-2]]')
+    t = do(d1, 'tzlines_exp.py "[lines[-2]]')
     assert t == 'mnop\n'
 
-    t = do(d1, 'lines_exp.py "lines[1:3]')
+    t = do(d1, 'tzlines_exp.py "lines[1:3]')
     assert t == '''
 ghijkl
 mnop
@@ -36,7 +36,7 @@ mnop
 
 def test_del_line():
     # del 1
-    t = do(d1, 'lines_exp.py "lines[:1] + lines[2:]')
+    t = do(d1, 'tzlines_exp.py "lines[:1] + lines[2:]')
     assert t == '''
 abcdef
 mnop
@@ -44,7 +44,7 @@ qrst
 '''.lstrip('\n')
 
     # del 1:3
-    t = do(d1, 'lines_exp.py "[lines[0],] + lines[3:]')
+    t = do(d1, 'tzlines_exp.py "[lines[0],] + lines[3:]')
     assert t == '''
 abcdef
 qrst
@@ -54,7 +54,7 @@ def test_replace():
     # replace indexed/sliced line(s) with given line)
     # could be accomplished by composing a delete then an insert
     # replace 2 NEW
-    t = do(d1, '''lines_exp.py "lines[:2] + ['NEW',] + lines[3:]"''')
+    t = do(d1, '''tzlines_exp.py "lines[:2] + ['NEW',] + lines[3:]"''')
     assert t == '''
 abcdef
 ghijkl
@@ -64,7 +64,7 @@ qrst
 
     # may be redundant with "delete & insert"
     # replace 1:3 "NEW LINE"
-    t = do(d1, '''lines_exp.py "lines[:1] + ['NEW LINE',] + lines[3:]"''')
+    t = do(d1, '''tzlines_exp.py "lines[:1] + ['NEW LINE',] + lines[3:]"''')
     assert t == '''
 abcdef
 NEW LINE
@@ -73,7 +73,7 @@ qrst
 
 def test_insert():
     # insert 1 NEW
-    t = do(short, '''lines_exp.py "lines[:1] + ['NEW',] + lines[1:]"''')
+    t = do(short, '''tzlines_exp.py "lines[:1] + ['NEW',] + lines[1:]"''')
     assert t == '''
 abcdef
 NEW

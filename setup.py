@@ -30,4 +30,15 @@ setuptools.setup(
         "pytest-cov==2.8.1",
         "pylint==2.4.4",
     ],
+    entry_points={
+        "console_scripts": [
+            "tzblock_exp = tool_zap.tools.cli.tzblock_exp:cli",
+            "tzcounts = tool_zap.tools.cli.tzcounts:cli",
+            "tzgrepline = tool_zap.tools.cli.tzgrepline:cli",
+            "tzjoin = tool_zap.tools.cli.tzjoin:cli",
+            "tzline_exp = tool_zap.tools.cli.tzline_exp:cli",
+            "tzlines_exp = tool_zap.tools.cli.tzlines_exp:cli",
+            "tzsplit = tool_zap.tools.cli.tzsplit:cli",
+        ]
+    },
 )
