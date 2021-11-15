@@ -1,4 +1,4 @@
-Paste these lines into your shell to be able to use Tool Zap:
+Paste these lines into a shell on a remote box to "bootstrap" Tool Zap:
 
 <pre>
 tzap() { tool=$1; shift; python <(curl --silent http://localhost:5555/cli/$tool.py) "$@"; }
