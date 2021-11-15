@@ -12,6 +12,23 @@ These components could potentially be split out into independent projects at a l
 
 
 # Features
+(WIP)
+
+
+# Installation
+- Clone repo and `cd tool_zap`
+- Create venv: `python -m venv venv`
+- Activate venv: `source venv/bin/activate`
+- Install project: `pip install -e .`
+- To install tools for local use, add path to entry points to PATH: Ex: `export PATH=$PATH:/my/dir/tool_zap/venv/Scripts/`
+- Change directory: `cd src/tool_zap/tools/`
+- Edit `index.html` to include absolute path to desired python interpreter, server name and port
+- Start webserver: `./start_remote_script_server.sh` (edit port number if desired)
+- Visit URL in a browser and copy `tzap` bootstrap snippet into clipboard
+- To use on a remote box:
+    - Go to remote box
+    - Paste `tzap` snippet into shell
+    - Use tzap: example: `ls -la | tzap tzcounts`
 
 
 # How to run tools against the code
