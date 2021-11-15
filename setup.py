@@ -23,7 +23,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
 
-    python_requires='>=3.7',
+    python_requires='>=3.6',
     install_requires=[
         # 3rd party dependencies
         "pytest==5.3.1",

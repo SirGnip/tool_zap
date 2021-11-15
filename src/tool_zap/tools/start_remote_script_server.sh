@@ -1,1 +1,1 @@
-winpty python -m http.server 5555
+python -m http.server 5555

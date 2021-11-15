@@ -1,4 +1,13 @@
+Paste these lines into your shell to enable Tool Zap:
+
 <pre>
-zap() { tool=$1; shift; python <(curl --silent http://localhost:5555/cli/$tool.py) "$@"; }
-zaps() { tool=$1; shift; source <(curl --silent http://localhost:5555/cli/$tool.sh) "$@"; }
+tzap() { tool=$1; shift; python <(curl --silent http://localhost:5555/cli/$tool.py) "$@"; }
+tzaps() { tool=$1; shift; source <(curl --silent http://localhost:5555/cli/$tool.sh) "$@"; }
+</pre>
+
+</hr>
+
+Example:
+<pre>
+ls -l | tzap tzcounts
 </pre>
