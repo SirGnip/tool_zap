@@ -1,7 +1,7 @@
 import argparse
 import sys
 DESC = 'Process block of text from stdin with expression split into lines.'
-EPILOG = 'Example: pylines.py "lines[1:3] + lines[-1:] (return first, second and last line)'
+EPILOG = 'Example: ls | tzexp_lines "lines[1:3] + lines[-1:] (return first, second and last line)'
 def cli():
     parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
     parser.add_argument('exp', help='Python expression that operates on the lines of text provided at stdin')

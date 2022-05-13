@@ -1,7 +1,7 @@
 import argparse
 import sys
 DESC = 'Get basic counts for block of test'
-EPILOG = 'Example: counts.py'
+EPILOG = 'Example: ls | tzcounts'
 def cli():
     parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
     args = parser.parse_args()

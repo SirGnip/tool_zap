@@ -11,6 +11,20 @@ Collection of command line string processing tools that can be used locally or r
 These components could potentially be split out into independent projects at a later time.
 
 
+# CLI Tools
+
+The CLI tools are designed to operate in a pipeline
+
+    $ ls -la | tzcounts
+
+- `tzcounts`: return line, word and character counts
+- `tzline_exp`: process input with expression that is given each line separately
+- `tzlines_exp`: process input with expression that is given all input lines as a list
+- `tzblock_exp`: process input with expression that treats all input as one large string
+- `tzsplit`: split each line using given delimiter into new lines, preserving existing newlines
+- `tzjoin`: join each individual line with given delimiter
+- `tzgrepline`: print lines matching a Python regex, with additional group formatting options
+
 # Features
 (WIP)
 

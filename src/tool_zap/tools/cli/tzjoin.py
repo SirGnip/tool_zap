@@ -1,7 +1,7 @@
 import argparse
 import sys
 DESC = 'Join each individual line with given character'
-EPILOG = 'Example: join.py " " (joins each line with a space)'
+EPILOG = 'Example: mycmd | tzjoin " " (joins each line with a space)'
 def cli():
     parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
     parser.add_argument('delimiter', help='Delimiter character or string')

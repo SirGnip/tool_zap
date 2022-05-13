@@ -1,7 +1,7 @@
 import argparse
 import sys
 DESC = 'Using a delimiter, split text into individual lines'
-EPILOG = 'Example: split.py , (splits text into a new line at each comma, existing newlines are preserved)'
+EPILOG = 'Example: mycmd | tzsplit , (splits text into a new line at each comma, existing newlines are preserved)'
 def cli():
     parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
     parser.add_argument('delimiter', help='Delimiter character or string')
