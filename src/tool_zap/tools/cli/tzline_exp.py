@@ -1,10 +1,10 @@
 import argparse
 import sys
-DESC = 'Process each line from stdin with a Python expression. The line is available as the variable "t". Can also parse line into a row as variable "r".'
+DESC = 'Process each line from stdin with a Python expression. The line is available as the variable "t". Can also parse line into a row as variable "r". Return a boolean to include or skip lines.'
 EPILOG = 'Example: ls | tzline_exp "t[0] + t[-2:]" (for each line, return first character plus last two characters)'
 def cli():
     parser = argparse.ArgumentParser(description=DESC, epilog=EPILOG)
-    parser.add_argument('exp', help='Python expression')
+    parser.add_argument('exp', help='Python expression that returns a string, list, or bool')
     parser.add_argument('--list', action='store_true', help="Split each line into a list exposed to expression as "r"")
     args = parser.parse_args()
     prev_line = ''
@@ -24,9 +24,12 @@ def cli():
             env['pr'] = prev_row
             prev_row = items
         result = eval(args.exp, {}, env)
-        if isinstance(result, str):  # dynamically determine how to output results based on expression's return type
+        idx += 1
+        if isinstance(result, bool):
+            if result:
+                print(line)
+        elif isinstance(result, str):  # dynamically determine how to output results based on expression's return type
             print(result)  # str
         else:
-            print(' '.join([str(r) for r in result]))  # list
-        idx += 1
+            print(' '.join([str(r) for r in result]))  # iterable
 if __name__ == '__main__': cli()

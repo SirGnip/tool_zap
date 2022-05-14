@@ -49,6 +49,8 @@ hdr line-based
 echo "$txt" | tzline_exp "f'#{i} {len(t)} {len(p)}'"
 hdr list-based
 echo "$txt" | tzline_exp --list "[r[0], r[4], r[2], pr[2], str(int(float(r[3])*100)) + '%', r[5].upper(), len(t), len(p)]"
+hdr filter
+echo "$txt" | tzline_exp --list "r[5]=='blue'" | tzline_exp --list "r[5], r[0], r[4]"
 
 
 mainhdr tzlines_exp

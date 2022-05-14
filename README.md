@@ -18,7 +18,7 @@ The CLI tools are designed to operate in a pipeline
     $ ls -la | tzcounts
 
 - `tzcounts`: return line, word and character counts
-- `tzline_exp`: process input with expression that is given each line separately
+- `tzline_exp`: process input with expression that is given each line separately, can be used to modify the output or filter rows
 - `tzlines_exp`: process input with expression that is given all input lines as a list
 - `tzblock_exp`: process input with expression that treats all input as one large string
 - `tzsplit`: split each line using given delimiter into new lines, preserving existing newlines
